@@ -1,0 +1,14 @@
+name: learn-github-actions  ##### Name of the workflow
+on: [push]  ##### action that should be performed by the workflow.. delete,push,pull etc
+jobs:     ### building block of a workflow. consist of name, runner and set of steps
+  build-test:   #### this is the name
+    runs-on: ubuntu-latest  ## this is runner-- a virtual server running on githubs
+                            ##the code wants the workflow to run on latest ubuntu.
+    steps:        ### this is the step reqiure of the workflow
+      - uses: actions/checkout@v3  ### run action/checkout for github version 3. This checks out your repository onto the specified runner (virtual machine)
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm i  ####run keyword executes a command on the runner
+      - run: npm run build
+      - run: npm run test
